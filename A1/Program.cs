@@ -9,6 +9,9 @@ namespace A1
     {
         static void Main(string[] args)
         {
+            Counter cnt = new Counter();
+
+            Console.ReadLine();
         }
     }
 }
