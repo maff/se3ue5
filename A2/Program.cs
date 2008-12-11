@@ -10,9 +10,18 @@ namespace A2
     {
         static void Main(string[] args)
         {
-            FileSystemHandler fs = new FileSystemHandler("D:\\tmp");
+            Console.WriteLine("Filesystem Watcher");
+            Console.WriteLine("------------------\n");
+
+            FileSystemHandler fs = new FileSystemHandler();
+            fs.Path = @"D:\tmp";
             fs.NotifyFilters = NotifyFilters.FileName | NotifyFilters.DirectoryName;
-            fs.Filter = "*.txt";
+            fs.Filter = "*";
+
+            Console.WriteLine("Currently watching {0} with pattern {1}", fs.Path, fs.Filter);
+            Console.WriteLine("Press any key to quit.\n");
+            Console.WriteLine("--\n");
+            
             fs.Run();
 
             Console.ReadLine();

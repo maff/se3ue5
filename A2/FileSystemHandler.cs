@@ -10,29 +10,36 @@ namespace A2
     {
         private FileSystemWatcher Watcher = new FileSystemWatcher();
 
-        public FileSystemHandler(string _path)
-        {
-            if (_path == "" || Directory.Exists(_path))
-                throw new ArgumentException("Pfad ist ungültig");
-
-            this.Watcher.Path = _path;
-            this.Watcher.EnableRaisingEvents = true;
-        }
-
         public void Run()
         {
             this.Watcher.Renamed += new RenamedEventHandler(Watcher_Renamed);
             this.Watcher.Created += new FileSystemEventHandler(Watcher_Created);
+            this.Watcher.EnableRaisingEvents = true;
         }
 
         private void Watcher_Created(object sender, FileSystemEventArgs e)
         {
-            Console.WriteLine();
+            Console.WriteLine("Created " + e.Name);
         }
 
         private void Watcher_Renamed(object sender, RenamedEventArgs e)
         {
-            Console.WriteLine();
+            Console.WriteLine("Renamed {0} to {1}", e.OldName, e.Name);
+        }
+
+        public string Path
+        {
+            set
+            {
+                if (value == "" || !Directory.Exists(value))
+                    throw new ArgumentException("Pfad ist ungültig");
+
+                this.Watcher.Path = value;
+            }
+            get
+            {
+                return this.Watcher.Path;
+            }
         }
 
         public NotifyFilters NotifyFilters
