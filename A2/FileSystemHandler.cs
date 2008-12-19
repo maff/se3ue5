@@ -46,7 +46,7 @@ namespace A2
             set
             {
                 if (value == "" || !Directory.Exists(value))
-                    throw new ArgumentException("Invald path!");
+                    throw new ArgumentException("Invalid path.");
 
                 this.Watcher.Path = value;
             }
