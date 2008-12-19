@@ -5,7 +5,7 @@ using System.Text;
 
 namespace A1
 {
-    class CounterConditionActions : List<CounterConditionAction>/*, IEnumerator<CounterConditionAction>*/
+    class CounterConditionActions : List<CounterConditionAction>
     {       
     }
 }
