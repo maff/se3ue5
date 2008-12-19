@@ -12,19 +12,33 @@ namespace A2
 
         public void Run()
         {
-            this.Watcher.Renamed += new RenamedEventHandler(Watcher_Renamed);
             this.Watcher.Created += new FileSystemEventHandler(Watcher_Created);
+            this.Watcher.Deleted += new FileSystemEventHandler(Watcher_Deleted);
+            this.Watcher.Renamed += new RenamedEventHandler(Watcher_Renamed);
+            this.Watcher.Changed += new FileSystemEventHandler(Watcher_Changed);
+
             this.Watcher.EnableRaisingEvents = true;
+            this.Watcher.IncludeSubdirectories = true;
         }
 
         private void Watcher_Created(object sender, FileSystemEventArgs e)
         {
-            Console.WriteLine("Created " + e.Name);
+            Console.WriteLine("Created \"{0}\"", e.Name);
+        }
+
+        private void Watcher_Deleted(object sender, FileSystemEventArgs e)
+        {
+            Console.WriteLine("Deleted \"{0}\"", e.Name);
         }
 
         private void Watcher_Renamed(object sender, RenamedEventArgs e)
         {
-            Console.WriteLine("Renamed {0} to {1}", e.OldName, e.Name);
+            Console.WriteLine("Renamed \"{0}\" to \"{1}\"", e.OldName, e.Name);
+        }
+
+        private void Watcher_Changed(object sender, FileSystemEventArgs e)
+        {
+            Console.WriteLine("Changed \"{0}\"", e.Name);
         }
 
         public string Path
@@ -32,7 +46,7 @@ namespace A2
             set
             {
                 if (value == "" || !Directory.Exists(value))
-                    throw new ArgumentException("Pfad ist ungültig");
+                    throw new ArgumentException("Invald path!");
 
                 this.Watcher.Path = value;
             }

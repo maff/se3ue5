@@ -7,5 +7,24 @@ namespace A1
 {
     class CounterObserver
     {
+        internal void Reset(object o, CounterEventArgs c)
+        {
+            PrintMessage(c.Count, "Counter was reset.");
+        }
+
+        internal void Increment(object o, CounterEventArgs c)
+        {
+            PrintMessage(c.Count, "Counter was incremented by " + c.Changed + ".");
+        }
+
+        internal void EvenValue(object o, CounterEventArgs c)
+        {
+            PrintMessage(c.Count, "Counter value is even.");
+        }
+
+        internal void PrintMessage(int count, string message)
+        {
+            Console.WriteLine("[Counter: {0}]\t{1}", count, message);
+        }
     }
 }
