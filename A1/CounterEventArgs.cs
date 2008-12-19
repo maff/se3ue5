@@ -27,13 +27,25 @@ namespace A1
             set { }
         }
 
-        public CounterEventArgs(int count)
+        private int actionCounter;
+        public int ActionCounter
         {
+            get
+            {
+                return this.actionCounter;
+            }
+            set { }
+        }
+
+        public CounterEventArgs(int actionCounter, int count)
+        {
+            this.actionCounter = actionCounter;
             this.count = count;
         }
 
-        public CounterEventArgs(int count, int changed)
+        public CounterEventArgs(int actionCounter, int count, int changed)
         {
+            this.actionCounter = actionCounter;
             this.changed = changed;
             this.count = count;
         }

@@ -5,15 +5,21 @@ using System.Text;
 
 namespace A1
 {
-    delegate void ResetEventHandler(object o, CounterEventArgs e);
-    delegate void IncrementEventHandler(object o, CounterEventArgs e);
-    delegate void EvenValueEventHandler(object o, CounterEventArgs e);
-
     class Counter
     {
-        internal event ResetEventHandler Reset;
-        internal event IncrementEventHandler Increment;
-        internal event EvenValueEventHandler EvenValue;
+        internal event CounterEventHandler Reset;
+        internal event CounterEventHandler Increment;
+        internal event CounterEventHandler EvenValue;
+
+        private int actionCounter;
+        public int ActionCounter
+        {
+            get
+            {
+                return this.actionCounter;
+            }
+            set {}
+        }
 
         private int count = 0;
         public int Count
@@ -36,17 +42,20 @@ namespace A1
         public void Add(int value)
         {
             this.Count += value;
+            this.actionCounter++;
 
-            OnIncrement(new CounterEventArgs(this.Count, value));
+            OnIncrement(new CounterEventArgs(this.ActionCounter, this.Count, value));
 
             if (this.Count % 2 == 0)
-                OnEvenValue(new CounterEventArgs(this.Count));
+                OnEvenValue(new CounterEventArgs(this.ActionCounter, this.Count));
         }
 
         public void Clear()
         {
             this.Count = 0;
-            OnReset(new CounterEventArgs(this.Count));
+            this.actionCounter++;
+
+            OnReset(new CounterEventArgs(this.ActionCounter, this.Count));
         }
 
         private void OnReset(CounterEventArgs c)

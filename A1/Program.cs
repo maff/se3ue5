@@ -12,15 +12,14 @@ namespace A1
             Counter counter = new Counter();
             CounterObserver observer = new CounterObserver();
 
-            counter.Reset += new ResetEventHandler(observer.Reset);
-            counter.Increment += new IncrementEventHandler(observer.Increment);
-            counter.EvenValue += new EvenValueEventHandler(observer.EvenValue);
+            counter.Reset += new CounterEventHandler(observer.Reset);
+            counter.Increment += new CounterEventHandler(observer.Increment);
+            counter.EvenValue += new CounterEventHandler(observer.EvenValue);
 
             counter.Add(50);
             counter.Add();
+            counter.Add(-5);
             counter.Add();
-            counter.Add();
-
             counter.Clear();
             counter.Add(25);
             counter.Add();
