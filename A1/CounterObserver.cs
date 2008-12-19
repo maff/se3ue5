@@ -27,7 +27,7 @@ namespace A1
 
         internal void PrintMessage(int actionCounter, int count, string message)
         {
-            Console.WriteLine("Observer\t#{0} {1}\t{2}", actionCounter, count, message);
+            Console.WriteLine("Observer\t#{0}\t{1}\t{2}", actionCounter, count, message);
         }
     }
 }

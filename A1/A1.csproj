@@ -46,7 +46,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Counter.cs" />
+    <Compile Include="ConditionAction\CounterActions.cs" />
+    <Compile Include="ConditionAction\CounterConditionAction.cs" />
+    <Compile Include="ConditionAction\CounterConditionActions.cs" />
+    <Compile Include="ConditionAction\CounterConditions.cs" />
     <Compile Include="CounterObserver.cs" />
+    <Compile Include="Delegates.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CounterEventArgs.cs" />

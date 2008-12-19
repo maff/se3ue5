@@ -11,6 +11,8 @@ namespace A1
         internal event CounterEventHandler Increment;
         internal event CounterEventHandler EvenValue;
 
+        public CounterConditionActions ConditionActions = new CounterConditionActions();
+
         private int actionCounter;
         public int ActionCounter
         {
@@ -48,6 +50,8 @@ namespace A1
 
             if (this.Count % 2 == 0)
                 OnEvenValue(new CounterEventArgs(this.ActionCounter, this.Count));
+
+            this.checkConditions();
         }
 
         public void Clear()
@@ -56,6 +60,18 @@ namespace A1
             this.actionCounter++;
 
             OnReset(new CounterEventArgs(this.ActionCounter, this.Count));
+            this.checkConditions();
+        }
+
+        private void checkConditions()
+        {
+            foreach (CounterConditionAction ca in this.ConditionActions)
+            {
+                if (ca.condition(this.Count))
+                    ca.action(this.ActionCounter, this.Count);
+            }
+
+            Console.WriteLine();
         }
 
         private void OnReset(CounterEventArgs c)
